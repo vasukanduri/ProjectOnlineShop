@@ -1,0 +1,122 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MobileShop.master.cs" Inherits="MobileShop.MobileShop" %>
+ 
+<div align="center" style="width: 100%; background-color: #669999; color: #FFFFFF; font-size: large; font-weight: bolder; font-style: normal; font-variant: normal; vertical-align: top; z-index: auto; top: 0px; left: 0px;">
+    <h3 align="left">Welcome Guest</h3>
+    <h1>Shop -E-lectronics</h1>
+</div>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>    
+    <div style="width: 100%; background-color: #FFFFFF; font-size: large; font-weight: bold; height: 15px; text-align: top; color: #336699;">
+        <marquee align="center" loop="infinite" behavior="scroll" scrolldelay="-20" direction="left" scrollamount="12">
+            !!Save 10% on above 50$ purchase  
+            &nbsp;
+           &nbsp;
+            &nbsp;
+            &nbsp;
+             &nbsp;
+           &nbsp;
+            &nbsp;
+            &nbsp;     
+                     
+            !!Free Shipping on $50 
+        </marquee>
+
+    </div>
+    <style type="text/css">
+        ul {
+            padding: 0;
+            list-style: none;
+            background: #f2f2f2;
+        }
+
+            ul li {
+                display: inline-block;
+                position: relative;
+                line-height: 30px;
+                text-align: left;
+                font-size: large;
+            }
+
+                ul li a {
+                    display: block;
+                    padding: 8px 25px;
+                    color: #333;
+                    text-decoration: none;
+                }
+
+                    ul li a:hover {
+                        color: #fff;
+                        background: #939393;
+                    }
+
+                ul li ul.dropdown {
+                    min-width: 125px; /* Set width of the dropdown */
+                    background: #f2f2f2;
+                    display: none;
+                    position: absolute;
+                    z-index: 999;
+                    left: 0;
+                }
+
+                ul li:hover ul.dropdown {
+                    display: block; /* Display the dropdown */
+                }
+
+                ul li ul.dropdown li {
+                    display: block;
+                }
+    </style>
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        <ul>
+            <li><a href="Home.aspx">Home</a></li>
+             <li>
+            <a href="#">Products &#9662;</a>
+            <%--<ul class="dropdown" id="ddlCategories">
+                <li><a href="#">Eval()</a></li>
+                <li><a href="#">Monitors</a></li>
+                <li><a href="#">Printers</a></li>
+            </ul>--%>          
+            <ul class="dropdown" id="ddlCategories" onclick="GetData">
+           <asp:DataList ID="dlCategories" runat="server" BorderColor="#CCCCCC" 
+               BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" 
+               GridLines="Horizontal" Width="252px" >
+                <FooterStyle  ForeColor="Black" />
+                                                <HeaderStyle BackColor="#CC3333" Font-Bold="true" ForeColor="White" />
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="lbtnCategories" runat="server" Text= '<% #Eval("CategoryName") %>' CausesValidation="False"
+                                                           CommandArgument ='<%# Eval("CategoryID") %>'  OnClick="lbtnCategories_Click">
+                                                        
+                                                    </asp:LinkButton>                                                    
+                                                </ItemTemplate>                                                
+                                                <SelectedItemStyle BackColor="#CC3333" Font-Bold="true" ForeColor="White" />                                                
+                                            </asp:DataList>
+                </ul>
+          
+        </li>
+           
+            <li><a href="#">Contact</a></li>
+            <li><a href="Admin/Login.aspx">Admin</a></li>
+            <li><a href="#">ViewOrders</a></li> 
+            <li><a href="#">Cart</a></li>
+            <li>
+                <asp:LinkButton ID="lbtnCartItems" runat="server" Text="0" OnClick="lbtnCartItems_Click"></asp:LinkButton>
+            </li>
+            <li><a href="Tracking.aspx">TrackOrders</a></li>          
+
+        </ul>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
